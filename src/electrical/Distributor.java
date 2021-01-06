@@ -11,7 +11,7 @@ public final class Distributor {
     private int contractLength;
     private Double initialBudget;
     private Double initialInfrastructureCost;
-    private Double initialProductionCost;
+    private Double initialProductionCost =0.0;
     private Double infrastructureCost;
     private boolean isBankrupt = false;
     private Double priceContract;

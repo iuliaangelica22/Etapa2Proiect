@@ -5,7 +5,7 @@ import entities.EnergyType;
 import java.util.ArrayList;
 
 public class Producer {
-    private int id;
+    private Integer id;
     private EnergyType energyType;
     private Integer maxDistributors;
     private Double infrastructureCost;
@@ -21,11 +21,11 @@ public class Producer {
         this.currentDistributors = currentDistributors;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

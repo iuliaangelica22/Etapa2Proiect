@@ -1,6 +1,7 @@
 Starting audit...
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/electrical/Month.java:22: Line is longer than 100 characters (found 109). [LineLength]
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/electrical/Month.java:22:71: ',' is not followed by whitespace. [WhitespaceAfter]
+[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/electrical/Distributor.java:14:42: '=' is not followed by whitespace. [WhitespaceAround]
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/electrical/Distributor.java:31:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/electrical/Distributor.java:37:55: '10' is a magic number. [MagicNumber]
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/electrical/Producer.java:16:5: Class 'Producer' looks like designed for extension (can be subclassed), but the method 'getCurrentDistributors' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'Producer' final or making the method 'getCurrentDistributors' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
@@ -29,13 +30,17 @@ Starting audit...
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/data/read/InitialData.java:43:50: '+' should be on a new line. [OperatorWrap]
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/data/read/InitialData.java:44:44: '+' should be on a new line. [OperatorWrap]
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/Main.java:22:25: ',' is not followed by whitespace. [WhitespaceAfter]
-[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/update/MonthlyUpdates.java:42:34: '+' should be on a new line. [OperatorWrap]
-[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/update/MonthlyUpdates.java:43:48: '+' should be on a new line. [OperatorWrap]
-[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/update/MonthlyUpdates.java:44:62: '+' should be on a new line. [OperatorWrap]
-[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/update/MonthlyUpdates.java:45:56: '+' should be on a new line. [OperatorWrap]
+[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/update/MonthlyUpdates.java:40:34: '+' should be on a new line. [OperatorWrap]
+[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/update/MonthlyUpdates.java:41:48: '+' should be on a new line. [OperatorWrap]
+[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/update/MonthlyUpdates.java:42:62: '+' should be on a new line. [OperatorWrap]
+[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/update/MonthlyUpdates.java:43:56: '+' should be on a new line. [OperatorWrap]
+[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/update/ProducerChanges.java:7:5: Class 'ProducerChanges' looks like designed for extension (can be subclassed), but the method 'getId' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'ProducerChanges' final or making the method 'getId' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/update/ProducerChanges.java:11:5: Class 'ProducerChanges' looks like designed for extension (can be subclassed), but the method 'setId' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'ProducerChanges' final or making the method 'setId' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/update/ProducerChanges.java:15:5: Class 'ProducerChanges' looks like designed for extension (can be subclassed), but the method 'getEnergyPerDistributor' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'ProducerChanges' final or making the method 'getEnergyPerDistributor' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/update/ProducerChanges.java:19:5: Class 'ProducerChanges' looks like designed for extension (can be subclassed), but the method 'setEnergyPerDistributor' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'ProducerChanges' final or making the method 'setEnergyPerDistributor' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/com/company/Main.java:3:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/com/company/Main.java:5:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/com/company/Main.java:6:1: File contains tab characters (this is the first instance). [FileTabCharacter]
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/simulations/InitialRound.java:93:5: Missing a Javadoc comment. [MissingJavadocMethod]
 Audit done.
-Checkstyle ends with 38 errors.
+Checkstyle ends with 43 errors.

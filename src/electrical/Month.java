@@ -1,7 +1,7 @@
 package electrical;
 
 import data.read.ReadData;
-import simulations.InitialRound;
+import simulations.Round;
 
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public final class Month {
      * @param consumers  realizarea actiunilor lunare
      */
     public void callMethod(final ReadData data, final ArrayList<ElectricalConsumers> consumers) {
-        InitialRound consumer = new InitialRound();
+        Round consumer = new Round();
         consumer.chooseContract(consumers, data.getInitialData().getDistributors());
 
         for (int i = 0; i < data.getNumberOfTurns(); i++) {
