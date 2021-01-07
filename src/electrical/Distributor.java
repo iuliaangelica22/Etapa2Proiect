@@ -11,12 +11,12 @@ public final class Distributor {
     private int contractLength;
     private Double initialBudget;
     private Double initialInfrastructureCost;
-    private Double initialProductionCost =0.0;
+    private Double initialProductionCost = 0.0;
     private Double infrastructureCost;
     private boolean isBankrupt = false;
     private Double priceContract;
     private Integer energyNeededKW;
-    private Double productionCost;
+    private Double productionCost = 0.0;
     private ArrayList<Producer> currentProducers = new ArrayList<>();
     private EnergyChoiceStrategyType producerStrategy;
 
@@ -153,5 +153,13 @@ public final class Distributor {
 
     public void setInfrastructureCost(Double infrastructureCost) {
         this.infrastructureCost = infrastructureCost;
+    }
+
+    public void setCurrentProducers(ArrayList<Producer> currentProducers) {
+        this.currentProducers = currentProducers;
+    }
+
+    public void setProductionCost(Double productionCost) {
+        this.productionCost = productionCost;
     }
 }

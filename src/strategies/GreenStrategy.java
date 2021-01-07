@@ -3,6 +3,7 @@ package strategies;
 import electrical.Producer;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class GreenStrategy implements Strategy {
     private final ArrayList<Producer> producers;
@@ -13,6 +14,7 @@ public class GreenStrategy implements Strategy {
 
     @Override
     public void specificStrategy() {
+        producers.sort(Comparator.comparing(Producer::getId));
         producers.sort((o1, o2) -> {
             int result = o1.getEnergyType().getLabel().compareTo(o2.getEnergyType().getLabel());
             if (result == 0) {

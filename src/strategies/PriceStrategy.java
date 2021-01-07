@@ -3,6 +3,7 @@ package strategies;
 import electrical.Producer;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 
 public class PriceStrategy implements Strategy {
@@ -14,6 +15,7 @@ public class PriceStrategy implements Strategy {
 
     @Override
     public void specificStrategy() {
+        producers.sort(Comparator.comparing(Producer::getId));
         producers.sort((o1, o2) -> {
             int result = o1.getPriceKW().compareTo(o2.getPriceKW());
             if (result == 0) {

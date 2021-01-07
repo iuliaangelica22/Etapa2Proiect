@@ -11,6 +11,7 @@ public class Producer {
     private Double infrastructureCost;
     private Double priceKW;
     private Integer energyPerDistributor;
+    private Integer numberOfCurrentDistributors = 0;
     private ArrayList<Distributor> currentDistributors = new ArrayList<>();
 
     public ArrayList<Distributor> getCurrentDistributors() {
@@ -67,5 +68,17 @@ public class Producer {
 
     public void setInfrastructureCost(Double infrastructureCost) {
         this.infrastructureCost = infrastructureCost;
+    }
+    public Integer getNumberOfCurrentDistributors() {
+        return numberOfCurrentDistributors;
+    }
+
+    public void setNumberOfCurrentDistributors(Integer numberOfCurrentDistributors) {
+        this.numberOfCurrentDistributors = numberOfCurrentDistributors;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

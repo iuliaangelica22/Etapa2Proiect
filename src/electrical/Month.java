@@ -21,6 +21,8 @@ public final class Month {
             consumer.update(data.getMonthlyUpdates().get(i).getNewConsumers(),
                     data.getInitialData().getDistributors(), consumers,data.getInitialData().getProducers());
             consumer.chooseContract(consumers, data.getInitialData().getDistributors());
+           consumer.chooseStrategy(data.getInitialData().getProducers(),
+                   data.getInitialData().getDistributors());
 
 
         }
