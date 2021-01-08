@@ -15,8 +15,10 @@ public class Producer extends Observer {
 
     @Override
     public void update(Integer energyPerDistributor) {
-
-        System.out.println("S-a realizat un update" + subject.getStatus());
+        for(Distributor distributor : currentDistributors){
+            distributor.setStatusUpdate(true);
+            distributor.setEnergyNeededKW(energyPerDistributor);
+        }
     }
 
 

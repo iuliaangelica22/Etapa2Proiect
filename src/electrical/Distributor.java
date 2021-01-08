@@ -12,13 +12,12 @@ public final class Distributor {
     private Double initialBudget;
     private Double initialInfrastructureCost;
     private Double initialProductionCost = 0.0;
-    private Double infrastructureCost;
     private boolean isBankrupt = false;
     private Double priceContract;
     private Integer energyNeededKW;
-    private Double productionCost = 0.0;
     private ArrayList<Producer> currentProducers = new ArrayList<>();
     private EnergyChoiceStrategyType producerStrategy;
+    private boolean statusUpdate = true;
 
     @JsonIgnore
     private final ArrayList<ElectricalConsumers>
@@ -28,14 +27,6 @@ public final class Distributor {
         return listOfConsumers;
     }
 
-    public long calculateProductionCost() {
-        productionCost = 0.0;
-        for (Producer producer : currentProducers) {
-            productionCost += producer.getPriceKW() * producer.getEnergyPerDistributor();
-
-        }
-        return Math.round(Math.floor(productionCost / 10));
-    }
 
     /**
      * calcularea pretului fiecarui contract pe baza numarului consumatorilor curenti
@@ -139,27 +130,21 @@ public final class Distributor {
         this.energyNeededKW = energyNeededKW;
     }
 
-    public Double getProductionCost() {
-        return productionCost;
-    }
 
     public ArrayList<Producer> getCurrentProducers() {
         return currentProducers;
     }
 
-    public Double getInfrastructureCost() {
-        return infrastructureCost;
-    }
-
-    public void setInfrastructureCost(Double infrastructureCost) {
-        this.infrastructureCost = infrastructureCost;
-    }
 
     public void setCurrentProducers(ArrayList<Producer> currentProducers) {
         this.currentProducers = currentProducers;
     }
 
-    public void setProductionCost(Double productionCost) {
-        this.productionCost = productionCost;
+    public boolean getStatusUpdate() {
+        return statusUpdate;
+    }
+
+    public void setStatusUpdate(boolean statusUpdate) {
+        this.statusUpdate = statusUpdate;
     }
 }

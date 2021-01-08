@@ -92,39 +92,42 @@ public final class Round {
 
     }
 
-    public void chooseStrategy(ArrayList<Producer> producers, ArrayList<Distributor> distributors) {
+    public void chooseProducer(ArrayList<Producer> producers, ArrayList<Distributor> distributors) {
         Integer sum;
         double auxiliar;
         int count;
 
         for (Distributor distributor : distributors) {
-            sum = 0;
-            count = -1;
-            auxiliar = 0;
-            EnergyChoiceStrategyType strategyType = distributor.getProducerStrategy();
-            StrategyFactory.createStrategy(strategyType, producers).specificStrategy();
-            for (Producer producer : producers) {
-                sum += producer.getEnergyPerDistributor();
-                count++;
-                if (sum >= distributor.getEnergyNeededKW()
-                        && (!producer.getNumberOfCurrentDistributors()
-                        .equals(producer.getMaxDistributors()))) {
-                    while (count != -1) {
-                        distributor.getCurrentProducers().add(producers.get(count));
-                        auxiliar += producers.get(count).getEnergyPerDistributor()
-                                * producers.get(count).getPriceKW();
-                        producers.get(count).setNumberOfCurrentDistributors(
-                                producers.get(count).getNumberOfCurrentDistributors() + 1);
-                        count--;
+            if (distributor.getStatusUpdate()) {
+                distributor.setStatusUpdate(false);
+                sum = 0;
+                count = -1;
+                auxiliar = 0;
+                EnergyChoiceStrategyType strategyType = distributor.getProducerStrategy();
+                StrategyFactory.createStrategy(strategyType, producers).specificStrategy();
+                for (Producer producer : producers) {
+                    sum += producer.getEnergyPerDistributor();
+                    count++;
+                    if (sum >= distributor.getEnergyNeededKW()
+                            && (!producer.getNumberOfCurrentDistributors()
+                            .equals(producer.getMaxDistributors()))) {
+                        while (count != -1) {
+                            distributor.getCurrentProducers().add(producers.get(count));
+                            auxiliar += producers.get(count).getEnergyPerDistributor()
+                                    * producers.get(count).getPriceKW();
+                            producers.get(count).setNumberOfCurrentDistributors(
+                                    producers.get(count).getNumberOfCurrentDistributors() + 1);
+                            count--;
+                        }
+                        distributor
+                                .setInitialProductionCost(distributor.getInitialProductionCost() +
+                                        Math.round(Math.floor(auxiliar / 10)));
+                        break;
                     }
-                    distributor.setProductionCost(distributor.getProductionCost() +
-                            Math.round(Math.floor(auxiliar / 10)));
-                    break;
                 }
             }
-
-
         }
+
 
     }
 

@@ -17,9 +17,9 @@ public final class Main {
      */
     public static void main(final String[] args) throws Exception {
        File in = new File(args[0]);
-        //File in = new File("complex_1.json");
+      //  File in = new File("complex_1.json");
        File out = new File(args[1]);
-       // File out = new File("rezultat.json");
+      //  File out = new File("rezultat.json");
         SimulateGame game = new SimulateGame();
         game.simulate(in,out);
 
