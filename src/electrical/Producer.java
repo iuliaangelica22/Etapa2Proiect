@@ -1,18 +1,24 @@
 package electrical;
 
 import entities.EnergyType;
-
+import observer.Observer;
 import java.util.ArrayList;
 
-public class Producer {
+public class Producer extends Observer {
     private Integer id;
     private EnergyType energyType;
     private Integer maxDistributors;
-    private Double infrastructureCost;
     private Double priceKW;
     private Integer energyPerDistributor;
     private Integer numberOfCurrentDistributors = 0;
     private ArrayList<Distributor> currentDistributors = new ArrayList<>();
+
+    @Override
+    public void update(Integer energyPerDistributor) {
+
+        System.out.println("S-a realizat un update" + subject.getStatus());
+    }
+
 
     public ArrayList<Distributor> getCurrentDistributors() {
         return currentDistributors;
@@ -62,13 +68,6 @@ public class Producer {
         this.energyPerDistributor = energyPerDistributor;
     }
 
-    public Double getInfrastructureCost() {
-        return infrastructureCost;
-    }
-
-    public void setInfrastructureCost(Double infrastructureCost) {
-        this.infrastructureCost = infrastructureCost;
-    }
     public Integer getNumberOfCurrentDistributors() {
         return numberOfCurrentDistributors;
     }
@@ -81,4 +80,6 @@ public class Producer {
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
+
+
 }
