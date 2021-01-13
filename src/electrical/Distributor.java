@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public final class Distributor {
 
-    private int id;
+    private Integer id;
     private int contractLength;
     private Double initialBudget;
     private Double initialInfrastructureCost;
     private Double initialProductionCost = 0.0;
     private boolean isBankrupt = false;
-    private Double priceContract;
+    private Double contractCost;
     private Integer energyNeededKW;
     private ArrayList<Producer> currentProducers = new ArrayList<>();
     private EnergyChoiceStrategyType producerStrategy;
@@ -36,11 +36,11 @@ public final class Distributor {
     public void calculatePriceContract() {
         final double profitPercentage = 0.2;
         if (listOfConsumers.size() == 0) {
-            priceContract = initialInfrastructureCost + initialProductionCost
+            contractCost = initialInfrastructureCost + initialProductionCost
                     + Math.round(Math.floor(profitPercentage * initialProductionCost));
         } else {
 
-            priceContract = (double) Math
+            contractCost = (double) Math
                     .round(Math.floor(initialInfrastructureCost / listOfConsumers.size())
                             + initialProductionCost
                             + Math.round(Math.floor(profitPercentage * initialProductionCost)));
@@ -70,11 +70,11 @@ public final class Distributor {
         return isBankrupt;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -110,8 +110,8 @@ public final class Distributor {
         this.initialProductionCost = initialProductionCost;
     }
 
-    public Double getPriceContract() {
-        return priceContract;
+    public Double getContractCost() {
+        return contractCost;
     }
 
     public EnergyChoiceStrategyType getProducerStrategy() {

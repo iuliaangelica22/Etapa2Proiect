@@ -1,5 +1,6 @@
 package electrical;
 
+import data.write.MonthlyStats;
 import entities.EnergyType;
 import observer.Observer;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class Producer extends Observer {
     private Integer energyPerDistributor;
     private Integer numberOfCurrentDistributors = 0;
     private ArrayList<Distributor> currentDistributors = new ArrayList<>();
+    private ArrayList<MonthlyStats> monthlyStats = new ArrayList<>();
 
     @Override
     public void update(Integer energyPerDistributor) {
@@ -26,9 +28,6 @@ public class Producer extends Observer {
         return currentDistributors;
     }
 
-    public void setCurrentDistributors(ArrayList<Distributor> currentDistributors) {
-        this.currentDistributors = currentDistributors;
-    }
 
     public Integer getId() {
         return id;
@@ -83,5 +82,12 @@ public class Producer extends Observer {
         return super.equals(obj);
     }
 
+    public ArrayList<MonthlyStats> getMonthlyStats() {
+        return monthlyStats;
+    }
+
+    public void setMonthlyStats(ArrayList<MonthlyStats> monthlyStats) {
+        this.monthlyStats = monthlyStats;
+    }
 
 }

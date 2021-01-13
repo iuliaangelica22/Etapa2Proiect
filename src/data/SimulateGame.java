@@ -5,6 +5,8 @@ import data.read.ReadData;
 import data.write.ConsumerWriting;
 import data.write.ContractWriting;
 import data.write.DistributorWriting;
+import data.write.MonthlyStats;
+import data.write.ProducerWriting;
 import data.write.WriteData;
 import electrical.Distributor;
 import electrical.ElectricalConsumers;
@@ -67,13 +69,33 @@ public final class SimulateGame {
 
             DistributorWriting distributorWriting = new DistributorWriting(
                     read.getInitialData().getDistributors().get(i).getId(),
+                    read.getInitialData().getDistributors().get(i).getEnergyNeededKW(),
+                    read.getInitialData().getDistributors().get(i).getContractCost().intValue(),
                     read.getInitialData().getDistributors().get(i).getInitialBudget().intValue(),
+                    read.getInitialData().getDistributors().get(i).getProducerStrategy(),
                     read.getInitialData().getDistributors().get(i).isBankrupt(), contracts);
             distributors.add(distributorWriting);
         }
 
+        ArrayList<ProducerWriting> producers = new ArrayList<>();
 
-        WriteData write = new WriteData(consumers, distributors);
+        for (int i = 0; i < read.getInitialData().getProducers().size(); i++) {
+
+            read.getInitialData().getProducers().get(i).getMonthlyStats().remove(0);
+            ArrayList<MonthlyStats> monthlyStats =
+                    read.getInitialData().getProducers().get(i).getMonthlyStats();
+
+            ProducerWriting producerWriting = new ProducerWriting(
+                    read.getInitialData().getProducers().get(i).getId(),
+                    read.getInitialData().getProducers().get(i).getMaxDistributors(),
+                    read.getInitialData().getProducers().get(i).getPriceKW(),
+                    read.getInitialData().getProducers().get(i).getEnergyType(),
+                    read.getInitialData().getProducers().get(i).getEnergyPerDistributor(),
+                    monthlyStats);
+            producers.add(producerWriting);
+        }
+
+        WriteData write = new WriteData(consumers, distributors, producers);
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(out, write);
 
     }

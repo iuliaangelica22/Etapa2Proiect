@@ -49,7 +49,7 @@ public final class Round {
         for (Distributor distributor : distributors) {
             distributor.calculatePriceContract();
         }
-        distributors.sort(Comparator.comparing(Distributor::getPriceContract));
+        distributors.sort(Comparator.comparing(Distributor::getContractCost));
         for (ElectricalConsumers consumers1 : consumers) {
             if (!consumers1.isBankrupt()) {
                 consumers1.setInitialBudget(
@@ -64,25 +64,21 @@ public final class Round {
                             && consumer.getChosenContract().isBankrupt()) {
                         consumer.setNumberOfMonth(0);
                     }
-
                     for (Distributor distributor : distributors) {
                         if (!distributor.isBankrupt()) {
                             consumer.setChosenContract(distributor);
-                            consumer.setPriceContract(distributor.getPriceContract());
+                            consumer.setPriceContract(distributor.getContractCost());
                             distributor.getListOfConsumers().add(consumer);
                             consumer.pay();
                             consumer.setContractLength(1);
                             break;
                         }
-
                     }
-
                 } else {
                     consumer.pay();
                     consumer.setContractLength(consumer.getContractLength() + 1);
                 }
             }
-
         }
         for (Distributor distributor : distributors) {
             if (!distributor.isBankrupt()) {
@@ -92,7 +88,8 @@ public final class Round {
 
     }
 
-    public void chooseProducer(ArrayList<Producer> producers, ArrayList<Distributor> distributors) {
+    public void chooseProducer(ArrayList<Producer> producers, ArrayList<Distributor> distributors,
+                               Integer mounth) {
         Integer sum;
         double auxiliar;
         int count;
@@ -113,25 +110,30 @@ public final class Round {
                             .equals(producer.getMaxDistributors()))) {
                         while (count != -1) {
                             distributor.getCurrentProducers().add(producers.get(count));
+                            producers.get(count).getCurrentDistributors().add(distributor);
                             auxiliar += producers.get(count).getEnergyPerDistributor()
                                     * producers.get(count).getPriceKW();
                             producers.get(count).setNumberOfCurrentDistributors(
                                     producers.get(count).getNumberOfCurrentDistributors() + 1);
                             count--;
+
                         }
                         distributor
-                                .setInitialProductionCost(distributor.getInitialProductionCost() +
-                                        Math.round(Math.floor(auxiliar / 10)));
+                                .setInitialProductionCost(distributor.getInitialProductionCost()
+                                        + Math.round(Math.floor(auxiliar / 10)));
                         break;
                     }
                 }
             }
         }
+        for (Producer producer : producers) {
+            for (int j = 0; j < producer.getCurrentDistributors().size(); j++) {
+                producer.getMonthlyStats().get(mounth).getDistributorsIds()
+                        .add(producer.getCurrentDistributors().get(j).getId());
 
-
+            }
+        }
     }
-
-
 }
 
 

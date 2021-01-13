@@ -7,7 +7,8 @@ import java.io.File;
  */
 public final class Main {
 
-    private Main() { }
+    private Main() {
+    }
 
     /**
      * Main function which reads the input file and starts simulation
@@ -16,13 +17,11 @@ public final class Main {
      * @throws Exception might error when reading/writing/opening files, parsing JSON
      */
     public static void main(final String[] args) throws Exception {
-       File in = new File(args[0]);
-      //  File in = new File("complex_1.json");
-       File out = new File(args[1]);
-      //  File out = new File("rezultat.json");
+         File in = new File(args[0]);
+//        File in = new File("basic_9.json");
+         File out = new File(args[1]);
+//        File out = new File("rezultat.json");
         SimulateGame game = new SimulateGame();
-        game.simulate(in,out);
-
-
+        game.simulate(in, out);
     }
 }

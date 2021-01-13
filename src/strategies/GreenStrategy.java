@@ -16,7 +16,7 @@ public class GreenStrategy implements Strategy {
     public void specificStrategy() {
         producers.sort(Comparator.comparing(Producer::getId));
         producers.sort((o1, o2) -> {
-            int result = o1.getEnergyType().getLabel().compareTo(o2.getEnergyType().getLabel());
+            int result = Boolean.compare(o2.getEnergyType().isRenewable(), o1.getEnergyType().isRenewable());
             if (result == 0) {
                 result = o1.getPriceKW().compareTo(o2.getPriceKW());
             }
