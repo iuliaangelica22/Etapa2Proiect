@@ -5,7 +5,7 @@ import electrical.Producer;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class QuantityStrategy implements Strategy {
+public final  class QuantityStrategy implements Strategy {
     private ArrayList<Producer> producers = new ArrayList<>();
 
     public QuantityStrategy(ArrayList<Producer> producers) {

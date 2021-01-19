@@ -8,6 +8,7 @@ import electrical.Producer;
 import electrical.SingletonFactory;
 import strategies.StrategyFactory;
 import strategies.EnergyChoiceStrategyType;
+import update.DistributorChanges;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -22,20 +23,23 @@ public final class Round {
 
     public void update(final ArrayList<Consumer> newConsumers,
                        final ArrayList<Distributor> distributors,
+                       final ArrayList<DistributorChanges> distributorChanges,
                        final ArrayList<ElectricalConsumers> consumers,
                        final ArrayList<Producer> producers) {
         for (Consumer newConsumer : newConsumers) {
             SingletonFactory consumer = SingletonFactory.getInstance();
             consumers.add(consumer.createConsumer(newConsumer));
         }
+
         distributors.sort(Comparator.comparing(Distributor::getId));
-        for (Distributor distributor : distributors) {
-            distributor.setInitialInfrastructureCost(distributor.getInitialInfrastructureCost());
+
+        for (DistributorChanges distributorChanges1 : distributorChanges) {
+            distributors.get(distributorChanges1.getId()).setInitialInfrastructureCost(
+                    distributorChanges1.getInfrastructureCost());
         }
-        for (Producer producer : producers) {
-            producer.setEnergyPerDistributor(producer.getEnergyPerDistributor());
-        }
+
         producers.sort(Comparator.comparing(Producer::getId));
+
     }
 
     /**
@@ -88,20 +92,33 @@ public final class Round {
 
     }
 
+    /**
+     * @param producers
+     * @param distributors
+     * @param month
+     */
+
     public void chooseProducer(ArrayList<Producer> producers, ArrayList<Distributor> distributors,
-                               Integer mounth) {
+                               Integer month) {
+        final int PERCENTAGE = 10;
         Integer sum;
         double auxiliar;
         int count;
 
         for (Distributor distributor : distributors) {
+            sum = 0;
+            count = -1;
+            auxiliar = 0.0;
             if (distributor.getStatusUpdate()) {
                 distributor.setStatusUpdate(false);
-                sum = 0;
-                count = -1;
-                auxiliar = 0;
+                for (Producer producer : distributor.getCurrentProducers()) {
+                    producer.getCurrentDistributors().remove(distributor);
+                }
+                distributor.getCurrentProducers().clear();
+
                 EnergyChoiceStrategyType strategyType = distributor.getProducerStrategy();
                 StrategyFactory.createStrategy(strategyType, producers).specificStrategy();
+
                 for (Producer producer : producers) {
                     sum += producer.getEnergyPerDistributor();
                     count++;
@@ -118,9 +135,8 @@ public final class Round {
                             count--;
 
                         }
-                        distributor
-                                .setInitialProductionCost(distributor.getInitialProductionCost()
-                                        + Math.round(Math.floor(auxiliar / 10)));
+                        distributor.setInitialProductionCost(
+                                        (double) Math.round(Math.floor(auxiliar / PERCENTAGE)));
                         break;
                     }
                 }
@@ -128,11 +144,14 @@ public final class Round {
         }
         for (Producer producer : producers) {
             for (int j = 0; j < producer.getCurrentDistributors().size(); j++) {
-                producer.getMonthlyStats().get(mounth).getDistributorsIds()
-                        .add(producer.getCurrentDistributors().get(j).getId());
 
+                producer.getMonthlyStats().get(month).getDistributorsIds()
+                        .add(producer.getCurrentDistributors().get(j).getId());
             }
+            producer.getMonthlyStats().get(month).getDistributorsIds()
+                    .sort(Comparator.comparing(Integer::intValue));
         }
+
     }
 }
 

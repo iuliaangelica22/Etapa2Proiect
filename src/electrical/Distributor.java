@@ -18,6 +18,7 @@ public final class Distributor {
     private ArrayList<Producer> currentProducers = new ArrayList<>();
     private EnergyChoiceStrategyType producerStrategy;
     private boolean statusUpdate = true;
+    private boolean producerChange = false;
 
     @JsonIgnore
     private final ArrayList<ElectricalConsumers>
@@ -146,5 +147,13 @@ public final class Distributor {
 
     public void setStatusUpdate(boolean statusUpdate) {
         this.statusUpdate = statusUpdate;
+    }
+
+    public boolean isProducerChange() {
+        return producerChange;
+    }
+
+    public void setProducerChange(boolean producerChange) {
+        this.producerChange = producerChange;
     }
 }

@@ -1,6 +1,6 @@
 package update;
 
-public class ProducerChanges {
+public final  class ProducerChanges {
     private int id;
     private Integer energyPerDistributor;
 

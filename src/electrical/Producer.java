@@ -3,24 +3,25 @@ package electrical;
 import data.write.MonthlyStats;
 import entities.EnergyType;
 import observer.Observer;
+
 import java.util.ArrayList;
 
-public class Producer extends Observer {
+public final class Producer extends Observer {
     private Integer id;
     private EnergyType energyType;
     private Integer maxDistributors;
     private Double priceKW;
     private Integer energyPerDistributor;
     private Integer numberOfCurrentDistributors = 0;
-    private ArrayList<Distributor> currentDistributors = new ArrayList<>();
+    private final ArrayList<Distributor> currentDistributors = new ArrayList<>();
     private ArrayList<MonthlyStats> monthlyStats = new ArrayList<>();
 
     @Override
     public void update(Integer energyPerDistributor) {
-        for(Distributor distributor : currentDistributors){
+        for (Distributor distributor : currentDistributors) {
             distributor.setStatusUpdate(true);
-            distributor.setEnergyNeededKW(energyPerDistributor);
         }
+        this.setEnergyPerDistributor(energyPerDistributor);
     }
 
 
@@ -65,8 +66,13 @@ public class Producer extends Observer {
         return energyPerDistributor;
     }
 
+    /**
+     * @param energyPerDistributor
+     */
+
     public void setEnergyPerDistributor(Integer energyPerDistributor) {
         this.energyPerDistributor = energyPerDistributor;
+        currentDistributors.forEach(c -> c.setProducerChange(true));
     }
 
     public Integer getNumberOfCurrentDistributors() {
@@ -77,10 +83,6 @@ public class Producer extends Observer {
         this.numberOfCurrentDistributors = numberOfCurrentDistributors;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 
     public ArrayList<MonthlyStats> getMonthlyStats() {
         return monthlyStats;

@@ -38,11 +38,11 @@ public final class InitialData {
 
     @Override
     public String toString() {
-        return "InitialData{" +
-                "consumers=" + consumers +
-                ", distributors=" + distributors +
-                ", producers=" + producers +
-                '}';
+        return "InitialData{"
+                + "consumers=" + consumers
+                + ", distributors=" + distributors
+                + ", producers=" + producers
+                + '}';
     }
 
 

@@ -37,10 +37,10 @@ public final class MonthlyUpdates {
 
     @Override
     public String toString() {
-        return "MonthlyUpdates{" +
-                "newConsumers=" + newConsumers +
-                ", distributorChanges=" + distributorChanges +
-                ", producerChanges=" + producerChanges +
-                '}';
+        return "MonthlyUpdates{"
+                + "newConsumers=" + newConsumers
+                + ", distributorChanges=" + distributorChanges
+                + ", producerChanges=" + producerChanges
+                + '}';
     }
 }

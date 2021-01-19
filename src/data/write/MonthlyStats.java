@@ -2,7 +2,7 @@ package data.write;
 
 import java.util.ArrayList;
 
-public class MonthlyStats {
+public final  class MonthlyStats {
     private  int month;
     private  ArrayList<Integer>  distributorsIds;
 

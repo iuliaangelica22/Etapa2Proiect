@@ -3,6 +3,7 @@ package electrical;
 import data.read.ReadData;
 import data.write.MonthlyStats;
 import simulations.Round;
+import update.ProducerChanges;
 
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public final class Month {
      * @param consumers realizarea actiunilor lunare
      */
     public void callMethod(final ReadData data, final ArrayList<ElectricalConsumers> consumers) {
-        Round round = new Round();
+         Round round = new Round();
 
 
         for (Producer producer : data.getInitialData().getProducers()) {
@@ -31,24 +32,25 @@ public final class Month {
         round.chooseContract(consumers, data.getInitialData().getDistributors());
 
         for (int i = 1; i <= data.getNumberOfTurns(); i++) {
+
             round.update(data.getMonthlyUpdates().get(i - 1).getNewConsumers(),
-                    data.getInitialData().getDistributors(), consumers,
+                    data.getInitialData().getDistributors(),
+                    data.getMonthlyUpdates().get(i - 1).getDistributorChanges(), consumers,
                     data.getInitialData().getProducers());
+
             round.chooseContract(consumers, data.getInitialData().getDistributors());
+            for (ProducerChanges producerChanges : data.getMonthlyUpdates().get(i - 1)
+                    .getProducerChanges()) {
+                data.getInitialData().getProducers().get(producerChanges.getId()).update(
+                        producerChanges.getEnergyPerDistributor());
+                // new Subject().setStatus(producerChanges.getEnergyPerDistributor());
+            }
+
             round.chooseProducer(data.getInitialData().getProducers(),
                     data.getInitialData().getDistributors(), i);
             data.getInitialData().getDistributors().sort(Comparator.comparing(Distributor::getId));
-            for (int k = 0; k < data.getInitialData().getDistributors().size(); k++) {
-                if (data.getInitialData().getDistributors().get(k).getStatusUpdate()) {
-                    for (int j = 0;
-                         j < data.getInitialData().getDistributors().get(k).getCurrentProducers()
-                                 .size(); j++) {
-                        data.getInitialData().getDistributors().get(k).getCurrentProducers().remove(
-                                data.getInitialData().getDistributors().get(k).getCurrentProducers().get(j));
-                    }
-                }
-            }
         }
+
     }
 }
 

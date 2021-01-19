@@ -4,7 +4,7 @@ import entities.EnergyType;
 
 import java.util.ArrayList;
 
-public class ProducerWriting {
+public final class ProducerWriting {
     private final Integer id;
     private final  Integer maxDistributors;
     private final Double priceKW;

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 
-public class PriceStrategy implements Strategy {
+public final class PriceStrategy implements Strategy {
     private  ArrayList<Producer> producers;
 
     public PriceStrategy(ArrayList<Producer> producers) {
