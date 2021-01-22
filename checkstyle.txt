@@ -9,5 +9,8 @@ Starting audit...
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/com/company/Main.java:5:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/com/company/Main.java:6:1: File contains tab characters (this is the first instance). [FileTabCharacter]
 [ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/simulations/Round.java:103:19: Name 'PERCENTAGE' must match pattern '^[a-z][a-zA-Z0-9]*$'. [LocalFinalVariableName]
+[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/simulations/Round.java:122:67: '<' should be on a new line. [OperatorWrap]
+[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/simulations/Round.java:134:83: '+' is not followed by whitespace. [WhitespaceAround]
+[ERROR] /home/iulia/Desktop/PROIECT POO/teme/teme/proiect-etapa2/./src/simulations/Round.java:134:83: '+' is not preceded with whitespace. [WhitespaceAround]
 Audit done.
-Checkstyle ends with 10 errors.
+Checkstyle ends with 13 errors.

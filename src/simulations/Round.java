@@ -101,13 +101,12 @@ public final class Round {
     public void chooseProducer(ArrayList<Producer> producers, ArrayList<Distributor> distributors,
                                Integer month) {
         final int PERCENTAGE = 10;
-        Integer sum;
+        int sum;
         double auxiliar;
-        int count;
+        ArrayList<Producer> newList = new ArrayList<>();
 
         for (Distributor distributor : distributors) {
             sum = 0;
-            count = -1;
             auxiliar = 0.0;
             if (distributor.getStatusUpdate()) {
                 distributor.setStatusUpdate(false);
@@ -120,31 +119,32 @@ public final class Round {
                 StrategyFactory.createStrategy(strategyType, producers).specificStrategy();
 
                 for (Producer producer : producers) {
-                    sum += producer.getEnergyPerDistributor();
-                    count++;
-                    if (sum >= distributor.getEnergyNeededKW()
-                            && (!producer.getNumberOfCurrentDistributors()
-                            .equals(producer.getMaxDistributors()))) {
-                        while (count != -1) {
-                            distributor.getCurrentProducers().add(producers.get(count));
-                            producers.get(count).getCurrentDistributors().add(distributor);
-                            auxiliar += producers.get(count).getEnergyPerDistributor()
-                                    * producers.get(count).getPriceKW();
-                            producers.get(count).setNumberOfCurrentDistributors(
-                                    producers.get(count).getNumberOfCurrentDistributors() + 1);
-                            count--;
+                    if (producer.getNumberOfCurrentDistributors() <
+                            producer.getMaxDistributors()) {
+                        sum += producer.getEnergyPerDistributor();
+                        newList.add(producer);
+                    }
+                    if (sum >= distributor.getEnergyNeededKW()) {
+                        for (Producer producer1 : newList) {
+                            distributor.getCurrentProducers().add(producer1);
+                            producer1.getCurrentDistributors().add(distributor);
+                            auxiliar += producer1.getEnergyPerDistributor()
+                                    * producer1.getPriceKW();
+                            producer1.setNumberOfCurrentDistributors(
+                                    producer1.getNumberOfCurrentDistributors() + 1);
 
                         }
                         distributor.setInitialProductionCost(
-                                        (double) Math.round(Math.floor(auxiliar / PERCENTAGE)));
+                                (double) Math.round(Math.floor(auxiliar / PERCENTAGE)));
+                        newList.clear();
                         break;
                     }
                 }
             }
         }
+
         for (Producer producer : producers) {
             for (int j = 0; j < producer.getCurrentDistributors().size(); j++) {
-
                 producer.getMonthlyStats().get(month).getDistributorsIds()
                         .add(producer.getCurrentDistributors().get(j).getId());
             }
